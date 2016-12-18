@@ -66,10 +66,14 @@ class RandomMatrixFile {
                 writeRow[j] = Math.random() * 50.0;
             }
             try {
-                for (double f : writeRow) {
-                    String num = String.format("%1$f.2 ", f);
+                int x = 0;
+                for (x = 0; x < writeRow.length - 1; x++) {
+                    String num = String.format("%1$.2f ", writeRow[x]);
                     buffy.write(num, 0, num.length());
                 }
+                //Write out the final number, without the space at the
+                //end.
+                buffy.write(String.format("%1$.2f", writeRow[x]));
                 buffy.newLine();
             }
             catch (IOException io) {
