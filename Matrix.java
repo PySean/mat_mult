@@ -70,4 +70,14 @@ class Matrix {
         this.cols = cols;
         reader.close();
     }
+    public toString() {
+        String build = "";
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.cols; j++) {
+                build += this.arr[i][j] + " ";
+            }
+            build += "\n";
+        }
+
+    }
 }
