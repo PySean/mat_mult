@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 class RunTest {
     public static void main(String [] args) {
         long startTime = System.currentTimeMillis();
-        if (args.length < 5) {
+        if (args.length < 6) {
             System.err.println("Usage: java RunTest <input1> <input2> <n> <m> <k> threads");
             System.exit(1);
         }
