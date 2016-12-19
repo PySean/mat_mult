@@ -18,6 +18,15 @@ class Matrix {
         Simple constructor for allocating an n x m matrix.
         @return: A freshly allocated Matrix object.
     */
+    public Matrix(int n, int m) {
+        arr = new float[n][m];
+        this.rows = n;
+        this.cols = m;
+    }
+    /**
+        This constructor includes a File object, as it
+        initializes the matrix with data from an input file.
+    */
     public Matrix(int n, int m, File matrixFile) {
         arr = new float[n][m];
         this.rows = n;
