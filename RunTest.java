@@ -9,7 +9,6 @@
 
 import java.io.File;
 import java.util.concurrent.Semaphore;
-
 class RunTest {
     public static void main(String [] args) {
         long startTime = System.currentTimeMillis();
@@ -21,7 +20,7 @@ class RunTest {
         int m = Integer.parseInt(args[3]);
         int k = Integer.parseInt(args[4]);
         int numThreads = Integer.parseInt(args[5]);
-        Counter c = new Counter(numThreads - 1);
+        //Counter c = new Counter(numThreads - 1);
         //Set this to numThreads - 1, turned negative. This is so the main thread
         //awakens appropriately after all threads are done with their work.
         Semaphore s = new Semaphore((-1 * numThreads) + 1);
@@ -32,14 +31,14 @@ class RunTest {
         ParaMat [] workers = new ParaMat[numThreads];
         Thread  [] threads = new Thread[numThreads];
         for (int i = 0; i < numThreads; i++) {
-            workers[i] = new ParaMat(c, s, first, second, result, i);
+            workers[i] = new ParaMat(s, first, second, result, i, numThreads);
         }
         for (int i = 0; i < numThreads; i++) {
             threads[i] = new Thread(workers[i]);
         }
         System.out.println("Starting threads");
         for (Thread t: threads) {
-            t.run();
+            t.start();
         }
         try {
             s.acquire();
@@ -52,4 +51,5 @@ class RunTest {
         System.out.println("Time (s): " + (float)(endTime - startTime)/1000 + 
                            "procs: " + numThreads);
     }
+
 }

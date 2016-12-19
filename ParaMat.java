@@ -12,12 +12,13 @@
 
 import java.util.concurrent.Semaphore;
 class ParaMat implements Runnable {
-    Counter c;
     Semaphore s;
     Matrix first, second, result;
     //Begins as the id of the thread. Represents the index of the
     //row, essentially.
     int id;
+    int numThreads;
+    /*
     public ParaMat(Counter c, Semaphore s, Matrix first, Matrix second, 
                    Matrix result, int id) {
         this.c = c;
@@ -27,6 +28,17 @@ class ParaMat implements Runnable {
         this.result = result;
         this.id = id;
     }
+    */
+
+    public ParaMat(Semaphore s, Matrix first, Matrix second, 
+                   Matrix result, int id, int numThreads) {
+        this.s = s;
+        this.first = first;
+        this.second = second;
+        this.result = result;
+        this.id = id;
+        this.numThreads = numThreads;
+    }
 
     public void run() {
         float [][] one = this.first.arr;
@@ -34,25 +46,25 @@ class ParaMat implements Runnable {
         int n = this.first.rows;
         int m = this.first.cols;
         int k = this.second.cols;
+        int curr = id;
         //id is the row of the result matrix I am sticking
         //values into.
-        while (id < n) {
+        while (curr < n) {
+            //System.out.println("Thread " + id); DEBUG
             float sum = 0;
             //Selects the column of the second array to multiply with.
             for (int i = 0; i < k; i++) {
                 //Walks down row id, column i, multiplying and adding.
                 for (int j = 0; j < m; j++) {
-                    sum += one[id][j] * two[j][i];
+                    sum += one[curr][j] * two[j][i];
                 }
-                result.arr[id][i] = sum;
+                result.arr[curr][i] = sum;
                 sum = 0;
             }
-            //Synchronized increment to select the next
-            //unworked-on row.
-            id = c.increment();
+            curr += numThreads;
         }
         //The thread family is done with computation. Let the main thread know.
-        System.out.println("Done!");
+        System.out.println("Thread " + id + " finished!");
         s.release();
     }
 }
