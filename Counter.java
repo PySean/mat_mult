@@ -14,7 +14,8 @@ class Counter {
     }
 
     public synchronized int increment() {
-        return ++value;
+        value++;
+        return value;
     }
 
 }

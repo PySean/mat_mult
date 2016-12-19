@@ -52,6 +52,7 @@ class ParaMat implements Runnable {
             id = c.increment();
         }
         //The thread family is done with computation. Let the main thread know.
+        System.out.println("Done!");
         s.release();
     }
 }

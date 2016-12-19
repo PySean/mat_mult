@@ -37,6 +37,7 @@ class RunTest {
         for (int i = 0; i < numThreads; i++) {
             threads[i] = new Thread(workers[i]);
         }
+        System.out.println("Starting threads");
         for (Thread t: threads) {
             t.run();
         }
