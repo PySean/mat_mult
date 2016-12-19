@@ -47,7 +47,8 @@ class RunTest {
             //Not getting interrupted..
         }
         long endTime = System.currentTimeMillis();
-        //DEBUG
-        System.out.println(result);
+        //System.out.println(result);
+        System.out.println("Time (s): " + (float)(endTime - startTime)/1000 + 
+                           "procs: " + numThreads);
     }
 }
