@@ -22,6 +22,8 @@ class ParaMat implements Runnable {
                    Matrix result, int id) {
         this.c = c;
         this.s = s;
+        this.first = first;
+        this.second = second;
         this.result = result;
         this.id = id;
     }
