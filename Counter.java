@@ -7,7 +7,7 @@ class Counter {
     private int value;
 
     //The passed in value MUST equal the number of threads 
-    //summoned (in this case, 1 to 4) in order to
+    //summoned (in this case, 1 to 4) minus one in order to
     //work correctly.
     public Counter(int value) {
         this.value = value;

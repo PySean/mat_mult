@@ -21,10 +21,10 @@ class RunTest {
         int m = Integer.parseInt(args[3]);
         int k = Integer.parseInt(args[4]);
         int numThreads = Integer.parseInt(args[5]);
-        Counter c = new Counter(numThreads);
-        //Set this to m - 1, turned negative. This is so the main thread
-        //awakens appropriately.
-        Semaphore s = new Semaphore((-1 * m) + 1);
+        Counter c = new Counter(numThreads - 1);
+        //Set this to numThreads - 1, turned negative. This is so the main thread
+        //awakens appropriately after all threads are done with their work.
+        Semaphore s = new Semaphore((-1 * numThreads) + 1);
         Matrix first = new Matrix(n, m, new File(args[0]));
         Matrix second = new Matrix(m, k, new File(args[1]));
         //System.out.println(mat.toString());
