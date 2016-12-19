@@ -65,6 +65,9 @@ class ParaMat implements Runnable {
         }
         //The thread family is done with computation. Let the main thread know.
         System.out.println("Thread " + id + " finished!");
-        s.release();
+        synchronized(s) {
+            s.release();
+        } 
+        System.out.println(s);
     }
 }
